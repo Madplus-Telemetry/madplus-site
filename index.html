@@ -13,9 +13,10 @@
   .meta { font-size: 14px; }
   h2 { font-size: 15px; margin: 28px 0 6px; color: #e6e6e6; }
   ul { list-style: none; padding: 0; margin: 0; }
-  li { padding: 8px 0; border-top: 1px solid #242424; }
-  li a { color: #2ecc71; }
-  li span { color: #a8a8a8; float: right; font-size: 14px; }
+  li { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid #242424; }
+  li a { color: #2ecc71; display: inline-block; vertical-align: middle; }
+  img.logo { display: block; height: 22px; width: auto; padding: 5px 8px; background: #fff; border-radius: 6px; }
+  li span { color: #a8a8a8; font-size: 14px; }
   code { font-size: 12px; word-break: break-all; color: #a8a8a8; }
 </style>
 </head>
@@ -27,8 +28,8 @@
   <p class="meta">Version 0.6.3 &middot; 7.9 MB &middot; 2026-11-11</p>
   <h2>Scanned by</h2>
   <ul>
-    <li><a href="https://www.virustotal.com/gui/file/3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1" target="_blank" rel="noopener">VirusTotal</a> <span>0 / 67 engines flagged it</span></li>
-    <li><a href="https://metadefender.com/results/hash/3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1" target="_blank" rel="noopener">MetaDefender</a> <span>0 / 21 engines flagged it</span></li>
+    <li><a href="https://www.virustotal.com/gui/file/3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1" target="_blank" rel="noopener" title="VirusTotal"><img class="logo" src="assets/virustotal.png" alt="VirusTotal"></a> <span>0 / 67 engines flagged it</span></li>
+    <li><a href="https://metadefender.com/results/hash/3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1" target="_blank" rel="noopener" title="MetaDefender"><img class="logo" src="assets/metadefender.png" alt="MetaDefender"></a> <span>0 / 21 engines flagged it</span></li>
   </ul>
   <h2>SHA-256</h2>
   <code>3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1</code>
