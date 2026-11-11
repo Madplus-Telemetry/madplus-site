@@ -31,7 +31,8 @@ const html = `<!doctype html>
   h2 { font-size: 15px; margin: 28px 0 6px; color: #e6e6e6; }
   ul { list-style: none; padding: 0; margin: 0; }
   li { padding: 8px 0; border-top: 1px solid #242424; }
-  li a { color: #2ecc71; }
+  li a { color: #2ecc71; display: inline-block; vertical-align: middle; }
+  img.logo { display: block; height: 22px; width: auto; padding: 5px 8px; background: #fff; border-radius: 6px; }
   li span { color: #a8a8a8; float: right; font-size: 14px; }
   code { font-size: 12px; word-break: break-all; color: #a8a8a8; }
 </style>
