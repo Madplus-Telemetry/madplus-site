@@ -11,7 +11,8 @@ function scanner(label, s) {
   if (!s) return '';
   let result = 'result pending';
   if (!s.pending && typeof s.total === 'number') result = `${s.flagged} / ${s.total} engines flagged it`;
-  return `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${label}</a> <span>${esc(result)}</span></li>`;
+  const logo = label.toLowerCase();
+  return `<li><a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(label)}"><img class="logo" src="assets/${logo}.png" alt="${esc(label)}"></a> <span>${esc(result)}</span></li>`;
 }
 
 const html = `<!doctype html>
