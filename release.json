@@ -1,0 +1,20 @@
+{
+  "tag": "0.6.3",
+  "version": "0.6.3",
+  "file": "madplus_telemetry_beta_v0.6.3.apk",
+  "size": 8286905,
+  "sha256": "3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1",
+  "date": "2026-11-11",
+  "scans": {
+    "virustotal": {
+      "url": "https://www.virustotal.com/gui/file/3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1",
+      "flagged": 0,
+      "total": 67
+    },
+    "metadefender": {
+      "url": "https://metadefender.com/results/hash/3141458b4b05671bb12b72e4862f6bbc4ba262abc46193a14e70e146a23495e1",
+      "flagged": 0,
+      "total": 21
+    }
+  }
+}
