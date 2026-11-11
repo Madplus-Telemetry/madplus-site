@@ -36,8 +36,7 @@ const html = `<!doctype html>
   .mark { position: relative; display: block; width: 56px; height: 33px; overflow: hidden; }
   .mark img { position: absolute; width: 121px; left: -33px; top: -44px; max-width: none; }
   .name { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
-  .lead { margin: 56px 0 32px; font-size: clamp(24px, 7vw, 30px); line-height: 1.25; letter-spacing: -0.02em; font-weight: 600; }
-  a.dl { display: block; padding: 16px; text-align: center; background: var(--accent); color: #04120e; font-size: 17px; font-weight: 600; text-decoration: none; border-radius: 12px; }
+  a.dl { display: block; margin-top: 56px; padding: 16px; text-align: center; background: var(--accent); color: #04120e; font-size: 17px; font-weight: 600; text-decoration: none; border-radius: 12px; }
   .meta { margin: 12px 0 0; color: var(--mute); font-size: 13px; line-height: 1.7; word-break: break-all; }
   h2 { margin: 48px 0 12px; color: var(--mute); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
   ul.scans { margin: 0; padding: 0; list-style: none; }
