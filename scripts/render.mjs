@@ -60,8 +60,6 @@ const html = `<!doctype html>
 <main>
   <div class="brand"><span class="mark"><img src="assets/madplus.png" alt=""></span><span class="name">Mad+</span></div>
 
-  <p class="lead">Live telemetry, HUD overlay and lap timing for Madcar Racing, on your phone.</p>
-
   <a class="dl" href="${esc(apk)}">Download for Android</a>
   <p class="meta">Version ${esc(r.version)} &middot; ${mb} MB &middot; ${esc(r.date)}<br>${esc(r.file)}</p>
   <p class="note">Mad+ is not on Google Play, so you install the APK directly.</p>
