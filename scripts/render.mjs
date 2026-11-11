@@ -61,7 +61,6 @@ const html = `<!doctype html>
 <main>
   <div class="brand"><span class="mark"><img src="assets/madplus.png" alt=""></span><span class="name">Mad+</span></div>
 
-  <h1>Follow the driver,<br>not the game.</h1>
   <p class="lead">Live telemetry, HUD overlay and lap timing for Madcar Racing, on your phone.</p>
 
   <a class="dl" href="${esc(apk)}">Download for Android</a>
