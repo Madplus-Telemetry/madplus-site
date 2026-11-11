@@ -33,7 +33,7 @@ const html = `<!doctype html>
   li { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid #242424; }
   li a { color: #2ecc71; display: inline-block; vertical-align: middle; }
   img.logo { display: block; height: 22px; width: auto; padding: 5px 8px; background: #fff; border-radius: 6px; }
-  li span { color: #a8a8a8; float: right; font-size: 14px; }
+  li span { color: #a8a8a8; font-size: 14px; }
   code { font-size: 12px; word-break: break-all; color: #a8a8a8; }
 </style>
 </head>
