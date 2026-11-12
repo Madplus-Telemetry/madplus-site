@@ -45,7 +45,7 @@ jobs:
         run: node scripts/scan.mjs dl/*.apk "$TAG"
 
       - name: Render page
-        run: node scripts/render.mjs
+        run: node scripts/render-next.mjs
 
       - name: Commit page
         run: |
