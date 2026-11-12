@@ -123,7 +123,7 @@ const html = `<!doctype html>
   <header class="hero">
     <div class="logo-wrap"><div class="bloom" aria-hidden="true"></div><span class="mark"><img src="${A}madplus.png" alt=""></span></div>
     <h1 class="name">Mad+</h1>
-    <a class="dl" href="${esc(apk)}">Download for Android</a>
+    <a class="dl" href="${esc(apk)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.64.64 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.64.64 0 0 0-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>Download for Android</a>
     <p class="facts after"><span>Version ${esc(r.version)}</span><span>${mb} MB</span><span>${esc(date)}</span></p>
     <p class="file after">${esc(r.file)}</p>
     <p class="note after">Mad+ is not on Google Play, so the APK installs directly.</p>
