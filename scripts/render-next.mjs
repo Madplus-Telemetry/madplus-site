@@ -82,10 +82,9 @@ const html = `<!doctype html>
   .scan:hover { background: rgba(255, 255, 255, 0.035); }
   .logo { display: block; height: 34px; width: auto; }
   .verdict { display: flex; flex-direction: column; align-items: flex-end; color: var(--mute); font-size: 13px; font-variant-numeric: tabular-nums; }
-  .verdict b { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 16px; font-weight: 600; }
-  .verdict b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
-  .verdict.ok b::before { background: var(--mint); box-shadow: 0 0 10px rgba(0, 251, 205, 0.7); }
-  .verdict.warn b::before { background: var(--warn); box-shadow: 0 0 10px rgba(245, 165, 36, 0.6); }
+  .verdict b { color: #fff; font-size: 16px; font-weight: 600; }
+  .verdict.warn b { color: var(--warn); }
+  a.dl svg { width: 22px; height: 22px; margin-right: 10px; fill: currentColor; flex: none; }
 
   ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
   ol.steps li { display: grid; grid-template-columns: 30px 1fr; padding: 0 0 14px; counter-increment: step; }
