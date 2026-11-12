@@ -28,130 +28,132 @@ function scanRow(label, s) {
     `<span class="verdict ${v.cls}"><b>${esc(v.main)}</b>${v.sub ? `<span>${esc(v.sub)}</span>` : ''}</span></a></li>`;
 }
 
-const lights = Array.from({ length: 14 }, (_, i) => `<i style="--i:${i}"></i>`).join('');
-
 const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#00fbcd">
+<meta name="theme-color" content="#000000">
 <meta name="description" content="Download Mad+, the telemetry companion app for Madcar Racing.">
 <meta property="og:image" content="${SITE}assets/madplus.png">${PREVIEW ? '\n<meta name="robots" content="noindex">' : ''}
 <title>Mad+ for Android</title>
 <style>
   :root {
-    --bg: #070808; --line: #1e2224; --ink: #eceeee; --mute: #8d9496;
-    --mint: #00fbcd; --mint-hi: #c4fff4; --warn: #f5a524; --off: #14181a;
-    --display: Bahnschrift, "DIN Alternate", "Avenir Next Condensed", "Roboto Condensed", "sans-serif-condensed", "Arial Narrow", system-ui, sans-serif;
+    --glass: rgba(255, 255, 255, 0.045); --edge: rgba(255, 255, 255, 0.1);
+    --mute: rgba(255, 255, 255, 0.6); --faint: rgba(255, 255, 255, 0.4);
+    --mint: #00fbcd; --warn: #f5a524;
   }
   * { box-sizing: border-box; }
-  html { background: var(--bg); }
-  body { margin: 0; color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
-  main { max-width: 600px; margin: 0 auto; padding: 28px 22px 64px; }
+  html { background: #000; color-scheme: dark; }
+  body { margin: 0; color: #fff; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 6px; }
 
-  .brand { display: flex; align-items: center; gap: 14px; }
-  .mark { position: relative; display: block; width: 64px; height: 38px; overflow: hidden; flex: none; }
-  .mark img { position: absolute; width: 139px; left: -38px; top: -50px; max-width: none; }
-  .name { margin: 0; font: 700 28px/1 var(--display); letter-spacing: 0.01em; }
+  .bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(70% 42% at 50% 0%, rgba(0, 251, 205, 0.08), transparent 70%); }
+  .bg::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(60% 46% at 50% 14%, #000, transparent 78%); mask-image: radial-gradient(60% 46% at 50% 14%, #000, transparent 78%); }
 
-  .head { margin-bottom: 64px; }
-  .lights { display: flex; gap: 5px; margin-bottom: 14px; }
-  .lights i { --c: var(--mint); --glow: rgba(0, 251, 205, 0.55); flex: 1; height: 10px; border-radius: 2px; background: var(--off); }
-  .lights i:nth-child(n+11) { --c: var(--mint-hi); --glow: rgba(196, 255, 244, 0.5); }
-  .lights.go i { animation: rev 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i) * 60ms + 300ms); }
-  .lights.go.fast i { animation-delay: calc(var(--i) * 22ms); }
-  @keyframes rev {
-    from { background: var(--off); box-shadow: 0 0 0 rgba(0, 251, 205, 0); }
-    to   { background: var(--c); box-shadow: 0 0 14px var(--glow); }
-  }
+  main { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; padding: 72px 22px 56px; }
+  .hero { display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-  a.dl { display: flex; align-items: center; justify-content: center; height: 66px; border-radius: 10px; background: var(--mint); color: #031210; font: 700 23px/1 var(--display); letter-spacing: 0.01em; text-decoration: none; transition: background-color 120ms, transform 120ms; }
-  a.dl:hover { background: #3dffdc; }
-  a.dl:active { transform: scale(0.992); }
-  .facts { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 16px 0 0; color: var(--mute); font-size: 14px; font-variant-numeric: tabular-nums; }
-  .file { margin: 4px 0 0; color: var(--mute); font-size: 13px; word-break: break-all; }
-  .note { margin: 20px 0 0; color: var(--mute); font-size: 14px; }
+  .logo-wrap { position: relative; width: 144px; height: 86px; margin-bottom: 30px; }
+  .bloom { position: absolute; left: 50%; top: 50%; width: 440px; height: 440px; margin: -220px 0 0 -220px; background: radial-gradient(circle, rgba(0, 251, 205, 0.2), transparent 62%); pointer-events: none; }
+  .mark { position: relative; display: block; width: 144px; height: 86px; overflow: hidden; }
+  .mark img { position: absolute; width: 312px; left: -86px; top: -113px; max-width: none; }
+  .name { margin: 0 0 34px; font-size: clamp(40px, 12vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.035em; }
 
-  .details { margin-top: 64px; }
-  h2 { margin: 0 0 6px; font: 600 15px/1.4 system-ui, sans-serif; color: var(--mute); }
-  section + section { margin-top: 48px; }
+  a.dl { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; min-width: min(100%, 290px); height: 56px; padding: 0 32px; border-radius: 999px; background: #fff; color: #000; font-size: 17px; font-weight: 600; text-decoration: none; transition: transform 120ms; }
+  a.dl::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(0, 0, 0, 0.09) 50%, transparent 65%); transform: translateX(-100%); transition: transform 700ms; }
+  a.dl:hover::after { transform: translateX(100%); }
+  a.dl:active { transform: scale(0.985); }
+  .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; margin: 22px 0 0; color: var(--mute); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .file { margin: 6px 0 0; color: var(--faint); font-size: 13px; word-break: break-all; }
+  .note { margin: 18px 0 0; max-width: 34ch; color: var(--mute); font-size: 14px; }
+
+  section { margin-top: 72px; }
+  h2 { margin: 0 0 14px; color: var(--mute); font-size: 14px; font-weight: 600; }
+  .panel { background: var(--glass); border: 1px solid var(--edge); border-radius: 18px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 
   ul.scans { margin: 0; padding: 0; list-style: none; }
-  .scan { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); text-decoration: none; }
-  ul.scans li:last-child .scan { border-bottom: 1px solid var(--line); }
-  .logo { display: block; height: 38px; width: auto; }
-  .verdict { display: flex; flex-direction: column; align-items: flex-end; text-align: right; color: var(--mute); font-size: 13px; font-variant-numeric: tabular-nums; }
-  .verdict b { font: 700 22px/1.1 var(--display); letter-spacing: 0.01em; color: var(--ink); }
-  .verdict.ok b { color: var(--mint); }
-  .verdict.warn b { color: var(--warn); }
-  .scan:hover .verdict b { text-decoration: underline; text-underline-offset: 4px; }
+  ul.scans li + li { border-top: 1px solid var(--edge); }
+  .scan { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; text-decoration: none; transition: background-color 150ms; }
+  ul.scans li:first-child .scan { border-radius: 17px 17px 0 0; }
+  ul.scans li:last-child .scan { border-radius: 0 0 17px 17px; }
+  ul.scans li:only-child .scan { border-radius: 17px; }
+  .scan:hover { background: rgba(255, 255, 255, 0.035); }
+  .logo { display: block; height: 34px; width: auto; }
+  .verdict { display: flex; flex-direction: column; align-items: flex-end; color: var(--mute); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .verdict b { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 16px; font-weight: 600; }
+  .verdict b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+  .verdict.ok b::before { background: var(--mint); box-shadow: 0 0 10px rgba(0, 251, 205, 0.7); }
+  .verdict.warn b::before { background: var(--warn); box-shadow: 0 0 10px rgba(245, 165, 36, 0.6); }
 
-  ol.steps { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: step; }
-  ol.steps li { display: grid; grid-template-columns: 34px 1fr; padding: 0 0 14px; counter-increment: step; }
-  ol.steps li::before { content: counter(step); font: 700 22px/1.3 var(--display); color: var(--mute); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+  ol.steps li { display: grid; grid-template-columns: 30px 1fr; padding: 0 0 14px; counter-increment: step; }
+  ol.steps li::before { content: counter(step); color: var(--faint); font-size: 14px; line-height: 1.9; font-variant-numeric: tabular-nums; }
 
-  .hash { display: flex; align-items: flex-start; gap: 14px; margin-top: 12px; }
+  .hash { display: flex; align-items: center; gap: 14px; padding: 14px 16px 14px 20px; }
   .hash code { flex: 1; min-width: 0; color: var(--mute); font: 12px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
-  .copy { flex: none; padding: 6px 14px; border: 1px solid var(--line); border-radius: 8px; background: none; color: var(--mint); font: 600 14px/1.4 system-ui, sans-serif; cursor: pointer; }
-  .copy:hover { border-color: var(--mint); }
+  .copy { flex: none; padding: 7px 16px; border: 1px solid var(--edge); border-radius: 999px; background: none; color: #fff; font: 600 14px/1.4 system-ui, sans-serif; cursor: pointer; transition: background-color 150ms; }
+  .copy:hover { background: rgba(255, 255, 255, 0.08); }
 
-  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--mute); font-size: 13px; }
+  footer { margin-top: 72px; color: var(--faint); font-size: 13px; text-align: center; }
   footer p { margin: 0 0 8px; }
 
-  @media (min-width: 880px) {
-    main { max-width: 1040px; padding: 56px 40px 80px; }
-    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
-    .hero { position: sticky; top: 56px; }
-    .head { margin-bottom: 120px; }
-    .details { margin-top: 0; padding-top: 6px; }
-    footer { grid-column: 1 / -1; }
-  }
+  /* One page-load sequence: logo emerges, then name, button and facts follow. */
+  .mark { animation: emerge 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both; }
+  .bloom { animation: bloom 1500ms ease-out both, breathe 7s ease-in-out 1500ms infinite; }
+  .name { animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 350ms both; }
+  a.dl { animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both; }
+  .after { animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both; }
+  .later { animation: fade 900ms ease-out 900ms both; }
+  @keyframes emerge { from { opacity: 0; transform: scale(0.92); filter: blur(10px); } to { opacity: 1; transform: none; filter: blur(0); } }
+  @keyframes bloom { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+  @keyframes breathe { 50% { opacity: 0.6; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .lights i { background: var(--c); box-shadow: none; }
-    .lights.go i { animation: none; }
-    a.dl { transition: none; }
+    .mark, .bloom, .name, a.dl, .after, .later { animation: none; }
+    a.dl::after, a.dl, .scan, .copy { transition: none; }
   }
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"></div>
 <main>
-  <div class="layout">
-    <div class="hero">
-      <div class="head brand"><span class="mark"><img src="${A}madplus.png" alt=""></span><h1 class="name">Mad+</h1></div>
-      <div class="lights go" aria-hidden="true">${lights}</div>
-      <a class="dl" href="${esc(apk)}">Download for Android</a>
-      <p class="facts"><span>Version ${esc(r.version)}</span><span>${mb} MB</span><span>${esc(date)}</span></p>
-      <p class="file">${esc(r.file)}</p>
-      <p class="note">Mad+ is not on Google Play, so the APK installs directly.</p>
-    </div>
+  <header class="hero">
+    <div class="logo-wrap"><div class="bloom" aria-hidden="true"></div><span class="mark"><img src="${A}madplus.png" alt=""></span></div>
+    <h1 class="name">Mad+</h1>
+    <a class="dl" href="${esc(apk)}">Download for Android</a>
+    <p class="facts after"><span>Version ${esc(r.version)}</span><span>${mb} MB</span><span>${esc(date)}</span></p>
+    <p class="file after">${esc(r.file)}</p>
+    <p class="note after">Mad+ is not on Google Play, so the APK installs directly.</p>
+  </header>
 
-    <div class="details">
-      <section>
-        <h2>Checked before release</h2>
+  <div class="later">
+    <section>
+      <h2>Checked before release</h2>
+      <div class="panel">
         <ul class="scans">
           ${scanRow('VirusTotal', r.scans.virustotal)}
           ${scanRow('MetaDefender', r.scans.metadefender)}
         </ul>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <h2>Install</h2>
-        <ol class="steps">
-          <li><span>Download the APK.</span></li>
-          <li><span>Open it and allow installs from your browser when Android asks.</span></li>
-          <li><span>Allow the VPN permission. Mad+ uses it to read Madcar's telemetry on your phone and never changes game traffic.</span></li>
-        </ol>
-      </section>
+    <section>
+      <h2>Install</h2>
+      <ol class="steps">
+        <li><span>Download the APK.</span></li>
+        <li><span>Open it and allow installs from your browser when Android asks.</span></li>
+        <li><span>Allow the VPN permission. Mad+ uses it to read Madcar's telemetry on your phone and never changes game traffic.</span></li>
+      </ol>
+    </section>
 
-      <section>
-        <h2>SHA-256</h2>
-        <div class="hash"><code id="sha">${esc(r.sha256)}</code><button class="copy" type="button" aria-live="polite">Copy</button></div>
-      </section>
-    </div>
+    <section>
+      <h2>SHA-256</h2>
+      <div class="panel hash"><code id="sha">${esc(r.sha256)}</code><button class="copy" type="button" aria-live="polite">Copy</button></div>
+    </section>
 
     <footer>
       <p>Mad+ is independent and not endorsed by Madcar's developers.</p>
@@ -161,16 +163,6 @@ const html = `<!doctype html>
 </main>
 <script>
 (function () {
-  var lights = document.querySelector('.lights');
-  var dl = document.querySelector('a.dl');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (lights && dl && !reduce) {
-    dl.addEventListener('click', function () {
-      lights.classList.remove('go', 'fast');
-      void lights.offsetWidth;
-      lights.classList.add('go', 'fast');
-    });
-  }
   var btn = document.querySelector('.copy');
   var sha = document.getElementById('sha');
   if (btn && sha) {
