@@ -53,10 +53,9 @@
   .scan:hover { background: rgba(255, 255, 255, 0.035); }
   .logo { display: block; height: 34px; width: auto; }
   .verdict { display: flex; flex-direction: column; align-items: flex-end; color: var(--mute); font-size: 13px; font-variant-numeric: tabular-nums; }
-  .verdict b { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 16px; font-weight: 600; }
-  .verdict b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
-  .verdict.ok b::before { background: var(--mint); box-shadow: 0 0 10px rgba(0, 251, 205, 0.7); }
-  .verdict.warn b::before { background: var(--warn); box-shadow: 0 0 10px rgba(245, 165, 36, 0.6); }
+  .verdict b { color: #fff; font-size: 16px; font-weight: 600; }
+  .verdict.warn b { color: var(--warn); }
+  a.dl svg { width: 22px; height: 22px; margin-right: 10px; fill: currentColor; flex: none; }
 
   ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
   ol.steps li { display: grid; grid-template-columns: 30px 1fr; padding: 0 0 14px; counter-increment: step; }
@@ -95,7 +94,7 @@
   <header class="hero">
     <div class="logo-wrap"><div class="bloom" aria-hidden="true"></div><span class="mark"><img src="../assets/madplus.png" alt=""></span></div>
     <h1 class="name">Mad+</h1>
-    <a class="dl" href="https://github.com/Madplus-Telemetry/madplus-site/releases/download/0.6.3/madplus_telemetry_beta_v0.6.3.apk">Download for Android</a>
+    <a class="dl" href="https://github.com/Madplus-Telemetry/madplus-site/releases/download/0.6.3/madplus_telemetry_beta_v0.6.3.apk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.64.64 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.64.64 0 0 0-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>Download for Android</a>
     <p class="facts after"><span>Version 0.6.3</span><span>7.9 MB</span><span>11 Nov 2026</span></p>
     <p class="file after">madplus_telemetry_beta_v0.6.3.apk</p>
     <p class="note after">Mad+ is not on Google Play, so the APK installs directly.</p>
